@@ -17,7 +17,7 @@ router
 .post(async (request,response)=>{
     const { username,firstname,lastname,password }= request.body;
     
-    const indbstoredusername=user.username;
+   
 
     const client=await createConnection();
     const hashedPassword=await genPassword(password);
