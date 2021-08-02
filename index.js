@@ -25,7 +25,7 @@ export async function createConnection(){
 }
 
 app.get("/",(request,response)=>{
-    response.send("welcome to app");
+    response.send("welcome to crmapp");
 });
    
     
