@@ -35,4 +35,10 @@ export async function putLead(client,lead){
     return result;
 }
 
+export async function getLeadData(client,filter){
+    const lead = await client.db("crm").collection("leads").find(filter).toArray();
+    console.log("successfully all leads obtained", lead);
+    return lead;
+}
+
 

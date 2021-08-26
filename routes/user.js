@@ -1,7 +1,7 @@
-import {  insertUser,getUsers ,getUser,putLead} from "../helper.js";
+import {  insertUser,getUsers ,getUser,putLead, getLeadData} from "../helper.js";
 
 import {createConnection} from "../index.js";
-import express from 'express';
+import express, { request, response } from 'express';
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import {auth} from "../middleware/auth.js"
@@ -52,6 +52,12 @@ router.route("/lead").post(async(request,response)=>{
     const {client,mobile_no,email,date,budget,requests}=request.body;
     const clients =await createConnection();
     const lead = await putLead(clients,{client:client,mobile_no:mobile_no,email:email,date:date,budget:budget,requests:requests});
+    response.send(lead);
+});
+
+router.route("/leadtable").get(async (request,response)=>{
+    const client = await createConnection();
+    const lead = await getLeadData(client,{});
     response.send(lead);
 });
 
