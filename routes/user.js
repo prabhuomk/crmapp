@@ -1,4 +1,4 @@
-import {  insertUser,getUsers ,getUser,putLead, getLeadData} from "../helper.js";
+import {  insertUser,getUsers ,getUser,putLead,putProduct, getLeadData, getProductData} from "../helper.js";
 
 import {createConnection} from "../index.js";
 import express, { request, response } from 'express';
@@ -60,6 +60,19 @@ router.route("/leadtable").get(async (request,response)=>{
     const lead = await getLeadData(client,{});
     response.send(lead);
 });
+
+router.route("/product").post(async(request,response)=>{
+const {product_name,description,price}=request.body;
+const client = await createConnection();
+const product=await putProduct(client,{product_name:product_name,description:description,price:price});
+response.send(product);
+});
+
+router.route("/productlist").get(async (request,response)=>{
+    const client = await createConnection();
+    const product=await  getProductData(client,{});
+    response.send(product);
+})
 
 
 router

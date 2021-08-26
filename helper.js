@@ -41,4 +41,16 @@ export async function getLeadData(client,filter){
     return lead;
 }
 
+export async function putProduct(client,product){
+    const product = await client.db("crm").collection("products").insertOne(product);
+    console.log("successfully products is inserted",product);
+    return product;
+}
+
+export async function getProductData(client,filter){
+    const product = await client.db("crm").collection("products").find(filter).toArray();
+    console.log("successfully all products are obtanied",product);
+    return product;
+}
+
 
