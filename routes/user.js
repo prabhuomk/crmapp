@@ -48,7 +48,7 @@ router
     
 });
 
-router.route("/lead").get(async(request,response)=>{
+router.route("/lead").post(async(request,response)=>{
     const {client,mobile_no,email,date,budget,requests}=request.body;
     const clients =await createConnection();
     const lead = await putLead(clients,{client:client,mobile_no:mobile_no,email:email,date:date,budget:budget,requests:requests});
