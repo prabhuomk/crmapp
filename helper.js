@@ -24,8 +24,14 @@ export async function getUser(client, filter) {
 }
 
 export async function updatePollById(client, id,newPoll) {
-    const result = await client.db("contestant").collection("poll").updateOne({ id: id },{$set:newPoll});
+    const result = await client.db("crm").collection("user").updateOne({ id: id },{$set:newPoll});
     console.log("successfully updated", result);
+    return result;
+}
+
+export async function putLead(client,lead){
+    const result = await client.db("crm").collection("leads").insertOne(lead);
+    console.log("successfully lead is inserted",result);
     return result;
 }
 

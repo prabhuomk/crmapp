@@ -1,4 +1,4 @@
-import {  insertUser,getUsers ,getUser} from "../helper.js";
+import {  insertUser,getUsers ,getUser,putLead} from "../helper.js";
 
 import {createConnection} from "../index.js";
 import express from 'express';
@@ -46,6 +46,13 @@ router
 
     }  
     
+});
+
+router.route("/lead").get(async(request,response)=>{
+    const {client,mobile_no,email,date,budget,requests}=request.body;
+    const clients =await createConnection();
+    const lead = await putLead(clients,{client,mobile_no,email,date,budget,requests});
+    response.send(lead);
 });
 
 
