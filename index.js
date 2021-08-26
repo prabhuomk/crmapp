@@ -34,7 +34,7 @@ app.get("/",(request,response)=>{
 app.use('/user',userRouter);
 
 
-app.listen(PORT,()=>console.log("the server started"));
+app.listen(PORT,()=>console.log("the server started",PORT));
 
 
 
