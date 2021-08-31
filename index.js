@@ -5,9 +5,13 @@ import {userRouter} from "./routes/user.js"
 import cors from "cors"
 
 dotenv.config();
+
 const app =express();
+
 const PORT=process.env.PORT;
+
 app.use(express.json());
+
 app.use(cors()); 
 
 export async function createConnection(){
@@ -24,10 +28,7 @@ export async function createConnection(){
     }
 }
 
-app.get("/",(request,response)=>{
-    response.send("welcome to crmapp");
-});
-   
+
     
 
 
@@ -35,6 +36,11 @@ app.use('/user',userRouter);
 
 
 app.listen(PORT,()=>console.log("the server started",PORT));
+
+app.get("/",(request,response)=>{
+    response.send("welcome to crmapp");
+});
+   
 
 
 
