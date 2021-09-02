@@ -42,7 +42,7 @@ router
     const isMatch= await bcrypt.compare(password,inDbStoredPassword);
     if(isMatch){
         const token=jwt.sign({id:user._id},process.env.KEY)
-        response.localStorage.setItem('token',token);
+        
         response.send({message:"successfully login",token:token});
     }
     else{
@@ -53,7 +53,7 @@ router
     
 });
 
-router.route("/lead").post(auth,async(request,response)=>{
+router.route("/lead").post(async(request,response)=>{
     const {client,mobile_no,email,date,budget,requests}=request.body;
     const clients =await createConnection();
     const lead = await putLead(clients,{client:client,mobile_no:mobile_no,email:email,date:date,budget:budget,requests:requests});
