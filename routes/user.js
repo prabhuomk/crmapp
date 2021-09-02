@@ -4,6 +4,7 @@ import {createConnection} from "../index.js";
 import express, { request, response } from 'express';
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import localStorage from "localStorage";
 
 
 const router=express.Router();
@@ -41,7 +42,7 @@ router
     const isMatch= await bcrypt.compare(password,inDbStoredPassword);
     if(isMatch){
         const token=jwt.sign({id:user._id},process.env.KEY)
-        response.localStorage.setItem('token',token); 
+        localStorage.setItem('token',token); 
         response.send({message:"successfully login",token:token,username:username});
     }
     else{
