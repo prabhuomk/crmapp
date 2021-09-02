@@ -38,7 +38,7 @@ export async function getOneLeadData(client,_id){
 }
 
 export async function updateLeaddata(client, _id,newLead) {
-    const result = await client.db("contestant").collection("poll").updateOne({ _id:new mongodb.ObjectId(_id) },{$set:newLead});
+    const result = await client.db("crm").collection("leads").updateOne({ _id:new mongodb.ObjectId(_id) },{$set:newLead});
     console.log("successfully updated", result);
     return result;
 }
