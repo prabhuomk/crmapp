@@ -1,4 +1,5 @@
-import {  insertUser,getUser,putLead,putProduct, getLeadData, getProductData,deleteLeadData,getOneLeadData} from "../helper.js";
+import {  insertUser,getUser,putLead,putProduct, getLeadData, getProductData,deleteLeadData,getOneLeadData
+,updateLeaddata} from "../helper.js";
 
 import {createConnection} from "../index.js";
 import express  from 'express';
@@ -77,6 +78,12 @@ router.route("/:_id").delete(async(request,response)=>{
     const client = await createConnection();
     const getonelead = await getOneLeadData(client,_id);
     response.send(getonelead);
+}).patch(async(request,response)=>{
+    const _id=request.params._id;
+    const newLead=request.body;
+    const client = await createConnection();
+    const updatelead = await updateLeaddata(client,_id,newLead);
+    response.send(updatelead);
 });
 
 router.route("/product").post(auth,async(request,response)=>{

@@ -37,6 +37,12 @@ export async function getOneLeadData(client,_id){
     return lead;
 }
 
+export async function updateLeaddata(client, _id,newLead) {
+    const result = await client.db("contestant").collection("poll").updateOne({ _id:new mongodb.ObjectId(_id) },{$set:newLead});
+    console.log("successfully updated", result);
+    return result;
+}
+
 export async function deleteLeadData(client,_id){
     const deletelead= await client.db("crm").collection("leads").deleteOne({_id:new mongodb.ObjectId(_id)});
     console.log("successfully lead is deleted",deletelead);
