@@ -1,4 +1,4 @@
-
+import mongodb from "mongodb";
 
 
 
@@ -10,12 +10,6 @@ export async function insertUser(client, user) {
     return result;
 }
 
-export async function getUsers(client, filter) {
-    const result = await client.db("crm").collection("user").find(filter).toArray();
-    console.log("successfully found the user", result);
-    return result;
-}
-
 
 export async function getUser(client, filter) {
     const result = await client.db("crm").collection("user").findOne(filter);
@@ -23,11 +17,7 @@ export async function getUser(client, filter) {
     return result;
 }
 
-export async function updatePollById(client, id,newPoll) {
-    const result = await client.db("crm").collection("user").updateOne({ id: id },{$set:newPoll});
-    console.log("successfully updated", result);
-    return result;
-}
+
 
 export async function putLead(client,lead){
     const result = await client.db("crm").collection("leads").insertOne(lead);
@@ -42,7 +32,7 @@ export async function getLeadData(client,filter){
 }
 
 export async function deleteLeadData(client,_id){
-    const deletelead= await client.db("crm").collection("leads").deleteOne({_id:_id});
+    const deletelead= await client.db("crm").collection("leads").deleteOne({_id:new mongodb.ObjectId(_id)});
     console.log("successfully lead is deleted",deletelead);
     return deletelead;
 }

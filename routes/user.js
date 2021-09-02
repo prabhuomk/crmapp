@@ -1,10 +1,9 @@
-import {  insertUser,getUsers ,getUser,putLead,putProduct, getLeadData, getProductData} from "../helper.js";
+import {  insertUser,getUser,putLead,putProduct, getLeadData, getProductData,deleteLeadData} from "../helper.js";
 
 import {createConnection} from "../index.js";
 import express, { request, response } from 'express';
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import {auth} from "../middleware/auth.js"
 
 
 const router=express.Router();
@@ -87,13 +86,7 @@ router.route("/productlist").get(async (request,response)=>{
 })
 
 
-router
-.route("/")
-.get(auth, async (request,response)=>{
-    const client=await createConnection();
-    const contestants=await getUsers(client,{});
-    response.send(contestants);
-});
+
 
 async function genPassword(password){
     
