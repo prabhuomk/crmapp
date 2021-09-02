@@ -31,6 +31,12 @@ export async function getLeadData(client,filter){
     return lead;
 }
 
+export async function getOneLeadData(client,_id){
+    const lead = await client.db("crm").collection("leads").findOne({_id:new mongodb.ObjectId(_id)});
+    console.log("successfully all leads obtained", lead);
+    return lead;
+}
+
 export async function deleteLeadData(client,_id){
     const deletelead= await client.db("crm").collection("leads").deleteOne({_id:new mongodb.ObjectId(_id)});
     console.log("successfully lead is deleted",deletelead);
