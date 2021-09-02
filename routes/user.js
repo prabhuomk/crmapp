@@ -81,7 +81,7 @@ const product=await putProduct(client,{product_name:product_name,description:des
 response.send(product);
 });
 
-router.route("/productlist").get(async (request,response)=>{
+router.route("/productlist").get(auth,async (request,response)=>{
     const client = await createConnection();
     const product=await  getProductData(client,{});
     response.send(product);
