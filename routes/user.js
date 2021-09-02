@@ -66,6 +66,13 @@ router.route("/leadtable").get(async (request,response)=>{
     response.send(lead);
 });
 
+router.route("/leadtable/:_id").delete(async(request,response)=>{
+    const _id=request.params._id;
+    const client = await createConnection();
+    const deletelead = await deleteLeadData(client,_id);
+    response.send(deletelead);
+})
+
 router.route("/product").post(async(request,response)=>{
 const {product_name,description,price}=request.body;
 const client = await createConnection();

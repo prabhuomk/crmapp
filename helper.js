@@ -41,6 +41,12 @@ export async function getLeadData(client,filter){
     return lead;
 }
 
+export async function deleteLeadData(client,_id){
+    const deletelead= await client.db("crm").collection("leads").deleteOne({_id:_id});
+    console.log("successfully lead is deleted",deletelead);
+    return deletelead;
+}
+
 export async function putProduct(client,products){
     const product = await client.db("crm").collection("products").insertOne(products);
     console.log("successfully products is inserted",product);
