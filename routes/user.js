@@ -86,7 +86,7 @@ router.route("/:_id").delete(async(request,response)=>{
     response.send(updatelead);
 });
 
-router.route("/product").post(async(request,response)=>{
+router.route("/product").post(auth,async(request,response)=>{
 const {product_name,description,price}=request.body;
 const client = await createConnection();
 const product=await putProduct(client,{product_name:product_name,description:description,price:price});
