@@ -1,10 +1,11 @@
 import {  insertUser,getUser,putLead,putProduct, getLeadData, getProductData,deleteLeadData} from "../helper.js";
 
 import {createConnection} from "../index.js";
-import express, { request, response } from 'express';
+import express  from 'express';
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import localStorage from "localStorage";
+import {auth} from "../middleware/auth.js"
 
 
 const router=express.Router();
@@ -73,7 +74,7 @@ router.route("/:_id").delete(async(request,response)=>{
     response.send(deletelead);
 })
 
-router.route("/product").post(async(request,response)=>{
+router.route("/product").post(auth,async(request,response)=>{
 const {product_name,description,price}=request.body;
 const client = await createConnection();
 const product=await putProduct(client,{product_name:product_name,description:description,price:price});
