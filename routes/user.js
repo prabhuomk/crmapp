@@ -86,14 +86,14 @@ router.route("/:_id").delete(async(request,response)=>{
     response.send(updatelead);
 });
 
-router.route("/product").post(auth,async(request,response)=>{
+router.route("/product").post(async(request,response)=>{
 const {product_name,description,price}=request.body;
 const client = await createConnection();
 const product=await putProduct(client,{product_name:product_name,description:description,price:price});
 response.send(product);
 });
 
-router.route("/productlist").get(auth,async (request,response)=>{
+router.route("/productlist").get(async (request,response)=>{
     const client = await createConnection();
     const product=await  getProductData(client,{});
     response.send(product);
