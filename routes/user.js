@@ -42,7 +42,7 @@ router
     if(isMatch){
         const token=jwt.sign({id:user._id},process.env.KEY)
         
-        response.send({message:"successfully login",token:token});
+        response.send({message:"successfully login",token:token,username:username});
     }
     else{
         response.send({message:"invalid login"});
