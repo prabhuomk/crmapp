@@ -42,7 +42,7 @@ router
     const isMatch= await bcrypt.compare(password,inDbStoredPassword);
     if(isMatch){
         const token=jwt.sign({id:user._id},process.env.KEY)
-        localStorage.setItem('token',token);
+        response.localStorage.setItem('token',token);
         response.send({message:"successfully login",token:token});
     }
     else{
