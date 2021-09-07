@@ -67,7 +67,7 @@ router.route("/leadtable").get(async (request,response)=>{
     response.send(lead);
 });
 
-router.route("/:_id").delete(async(request,response)=>{
+router.route("/leadtable/:_id").delete(async(request,response)=>{
     const _id=request.params._id;
     const client = await createConnection();
     const deletelead = await deleteLeadData(client,_id);
