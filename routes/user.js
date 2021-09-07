@@ -1,5 +1,4 @@
-import {  insertUser,getUser,putLead,putProduct, getLeadData, getProductData,deleteLeadData,getOneLeadData
-,updateLeaddata} from "../helper.js";
+import {  insertUser,getUser,putLead,putProduct, getLeadData, getProductData,deleteLeadData,getOneLeadData,updateLeaddata} from "../helper.js";
 
 import {createConnection} from "../index.js";
 import express  from 'express';
