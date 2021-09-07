@@ -32,9 +32,9 @@ export async function getLeadData(client,filter){
 }
 
 export async function getOneLeadData(client,_id){
-    const lead = await client.db("crm").collection("leads").findOne({_id:new mongodb.ObjectId(_id)});
-    console.log("successfully all leads obtained", lead);
-    return lead;
+    const onelead = await client.db("crm").collection("leads").findOne({_id:new mongodb.ObjectId(_id)});
+    console.log("successfully all leads obtained", onelead);
+    return onelead;
 }
 
 export async function updateLeaddata(client, _id,newLead) {
