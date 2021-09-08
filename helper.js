@@ -10,6 +10,12 @@ export async function insertUser(client, user) {
     return result;
 }
 
+export async function inserttoken(client, user) {
+    const result = await client.db("crm").collection("tokens").insertOne(user);
+    console.log("successfully pass inserted", result);
+    return result;
+}
+
 
 export async function getUser(client, filter) {
     const result = await client.db("crm").collection("user").findOne(filter);

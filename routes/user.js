@@ -1,4 +1,4 @@
-import {  insertUser,getUser,putLead,putProduct, getLeadData, getProductData,deleteLeadData,getOneLeadData,updateLeaddata} from "../helper.js";
+import {  insertUser,getUser,putLead,putProduct, getLeadData, getProductData,deleteLeadData,getOneLeadData,updateLeaddata,inserttoken} from "../helper.js";
 
 import {createConnection} from "../index.js";
 import express  from 'express';
@@ -6,7 +6,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import {auth} from "../middleware/auth.js"
-
+import {sendEmail} from "../middleware/mail.js"
 
 const router=express.Router();
 
@@ -38,7 +38,8 @@ router
     if(!user){
         response.send({message:"user not exist ,please sign up"})
     }else{
-    console.log(user);
+    console.log(user._id);
+    
     const inDbStoredPassword=user.password;
     const isMatch= await bcrypt.compare(password,inDbStoredPassword);
     if(isMatch){
@@ -53,6 +54,36 @@ router
 } 
     
 });
+
+router
+.route("/forgetpassword")
+.post(async (request,response)=>{
+    const { username }= request.body;
+    const client=await createConnection();
+    const user=await getUser(client,{username:username});
+    if(!user){
+        response.send({message:"user not exist"})
+    }else{
+
+        const token=jwt.sign({id:user._id},process.env.REKEY);
+        const store= await inserttoken(client,{tokenid:user._id,token:token});
+        const link = `${process.env.BASE_URL}/password-reset/${user._id}/${token}`;
+       
+      const mail=  await sendEmail(user.username, "Password reset", link);
+
+        response.send(mail);
+
+    } 
+} 
+    
+);
+
+
+
+
+
+
+
 
 router.route("/lead").post(async(request,response)=>{
     const {client,mobile_no,email,date,budget,requests}=request.body;
@@ -99,6 +130,9 @@ router.route("/productlist").get(async (request,response)=>{
     const product=await  getProductData(client,{});
     response.send(product);
 })
+
+
+
 
 
 
