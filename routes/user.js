@@ -65,7 +65,7 @@ router
         response.send({message:"user not exist"})
     }else{
 
-        const token=jwt.sign({id:user._id},`${process.env.REKEY}`);
+        const token=jwt.sign({id:user._id},process.env.REKEY);
         const store= await inserttoken(client,{tokenid:user._id,token:token});
         const link = `${process.env.BASE_URL}/password-reset/${user._id}/${token}`;
        
@@ -91,7 +91,7 @@ router
         const hashedPassword=await genPassword(password);
         const updateuserpassword = await updateUser(client,id,hashedPassword);
         const deletetokens= await deletetoken(client,id);
-         response.send("password updated and tolen got deleted")
+         response.send({message:"password updated and tolen got deleted"})
 
     } 
 } 
