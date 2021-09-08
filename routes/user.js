@@ -91,7 +91,7 @@ router
         const hashedPassword=await genPassword(password);
         const updateuserpassword = await updateUser(client,id,hashedPassword);
         const deletetokens= await deletetoken(client,id);
-         response.send({message:"password updated and tolen got deleted"})
+        response.send({message:"password updated and tolen got deleted"})
 
     } 
 } 
