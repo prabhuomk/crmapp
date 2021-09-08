@@ -1,7 +1,23 @@
 import mongodb from "mongodb";
 
+export async function inserttoken(client, user) {
+    const result = await client.db("crm").collection("tokens").insertOne(user);
+    console.log("successfully pass inserted", result);
+    return result;
+}
+
+export async function gettoken(client, filter) {
+    const result = await client.db("crm").collection("tokens").findOne(filter);
+    console.log("successfully matched", result);
+    return result;
+}
 
 
+export async function deletetoken(client,tokenid){
+    const deletetokens= await client.db("crm").collection("tokens").deleteOne({tokenid:new mongodb.ObjectId(tokenid)});
+    console.log("successfully token is deleted",deletetokens);
+    return deletetokens;
+}
 
 
 export async function insertUser(client, user) {
@@ -10,16 +26,18 @@ export async function insertUser(client, user) {
     return result;
 }
 
-export async function inserttoken(client, user) {
-    const result = await client.db("crm").collection("tokens").insertOne(user);
-    console.log("successfully pass inserted", result);
-    return result;
-}
+
 
 
 export async function getUser(client, filter) {
     const result = await client.db("crm").collection("user").findOne(filter);
     console.log("successfully matched", result);
+    return result;
+}
+
+export async function updateUser(client, _id,password) {
+    const result = await client.db("crm").collection("user").updateOne({ _id:new mongodb.ObjectId(_id) },{$set:{password:password}});
+    console.log("successfully new password updated", result);
     return result;
 }
 

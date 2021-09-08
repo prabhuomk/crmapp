@@ -1,4 +1,4 @@
-import {  insertUser,getUser,putLead,putProduct, getLeadData, getProductData,deleteLeadData,getOneLeadData,updateLeaddata,inserttoken} from "../helper.js";
+import {  insertUser,getUser,putLead,putProduct, getLeadData, getProductData,deleteLeadData,getOneLeadData,updateLeaddata,inserttoken,gettoken,deletetoken,updateUser} from "../helper.js";
 
 import {createConnection} from "../index.js";
 import express  from 'express';
@@ -72,6 +72,27 @@ router
       const mail=  await sendEmail(user.username, "Password reset", link);
 
         response.send(mail);
+
+    } 
+} 
+    
+);
+
+router
+.route("/resetpassword/:id/:token")
+.post(async (request,response)=>{
+    const { password }= request.body;
+    const id=request.params.id;
+    const token=request.params.token;
+    const client=await createConnection();
+    const tokens=await gettoken(client,{token:token});
+    if(!tokens){
+        response.send({message:"invalid token"})
+    }else{
+        const hashedPassword=await genPassword(password);
+        const updateuserpassword = await updateUser(client,id,hashedPassword);
+        const deletetokens= await deletetoken(client,id);
+         response.send("password updated and tolen got deleted")
 
     } 
 } 
