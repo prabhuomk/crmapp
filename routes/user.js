@@ -70,8 +70,7 @@ router
         const link = `${process.env.BASE_URL}/password-reset/${user._id}/${token}`;
        
       const mail=  await sendEmail(user.username, "Password reset", link);
-
-        response.send(mail);
+    response.send({message:"link has been send to your email for password change"});
 
     } 
 } 
