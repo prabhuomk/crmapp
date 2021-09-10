@@ -18,12 +18,12 @@ router
 .post(async (request,response)=>{
     const { username,firstname,lastname,password }= request.body;
     
-   
+    const isverified="false";
 
     const client=await createConnection();
     const hashedPassword=await genPassword(password);
 
-    const pass=await insertUser(client,{username:username,firstname:firstname,lastname:lastname,password:hashedPassword})
+    const pass=await insertUser(client,{username:username,firstname:firstname,lastname:lastname,password:hashedPassword,isverified:isverified})
     console.log(hashedPassword,pass );
     response.send(pass);
     
@@ -91,7 +91,7 @@ router
         const hashedPassword=await genPassword(password);
         const updateuserpassword = await updateUser(client,id,hashedPassword);
         const deletetokens= await deletetoken(client,id);
-        response.send({message:"password updated and tolen got deleted"})
+        response.send({message:"password updated and token got deleted"})
 
     } 
 } 
