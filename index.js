@@ -32,7 +32,7 @@ export async function createConnection(){
     
 
 
-app.use('/user',userRouter);
+app.use('/',userRouter);
 
 
 app.listen(PORT,()=>console.log("the server started",PORT));

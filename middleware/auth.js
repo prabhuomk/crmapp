@@ -10,7 +10,7 @@ export const auth=(request,response,next)=>{
     next();
     }catch(err){
         response.status(401);
-        response.send({err:err.message})
+        response.send({message:"your are not authorished to perform this action  "})
     }
     
 
