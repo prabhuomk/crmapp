@@ -80,7 +80,7 @@ router.route("/signup").post(async (request, response) => {
 
 router
   .route("/activate_account/:email_id/:token")
-  .post(async (request, response) => {
+  .get(async (request, response) => {
     const email_id = request.params.email_id;
     const token = request.params.token;
     const client = await createConnection();
